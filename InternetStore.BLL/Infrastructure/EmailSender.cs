@@ -21,7 +21,7 @@ namespace InternetStore.BLL.Infrastructure
                 messPool = new Queue<MailMessage>();
             }
 
-            //"anonim.ill-wisher@bk.ru"
+            //"anonim.ill-wisher@bk.ru" 
             MailAddress from = new MailAddress("be.green@inbox.ru");
             MailAddress to = new MailAddress(recipient);
             MailMessage m = new MailMessage(from, to);
