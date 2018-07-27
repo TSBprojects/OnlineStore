@@ -1,0 +1,83 @@
+﻿@model InternetStore.WEB.Models.ProductModel
+
+@using (Ajax.BeginForm(
+                    "ChangeProductPost", "Admin", null,
+                    new AjaxOptions() { /*UpdateTargetId = "form-block-" + ViewBag.prodId*/ },
+                    new { enctype = "multipart/form-data", @class = "admin-form" }))
+{
+    <div class="field-block">
+        @if (ViewBag.Change)
+        {
+            <p class="form-field">
+                @Html.HiddenFor(model => model.productId, new { @class = "input-field" })
+            </p>
+        }
+        <p class="form-field">
+            @Html.LabelFor(model => model.Name, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "Название", @class = "input-field" } })
+        </p>
+        <p class="form-field">
+            @Html.LabelFor(model => model.PartialDescription, new { @class = "form-label" })
+            @Html.EditorFor(model => model.PartialDescription, new { htmlAttributes = new { placeholder = "Частичное описание", @class = "input-field" } })
+        </p>
+        <p class="form-field">
+            @Html.LabelFor(model => model.FullDescription, new { @class = "form-label" })
+            @Html.EditorFor(model => model.FullDescription, new { htmlAttributes = new { placeholder = "Полное описание", @class = "input-field" } })
+        </p>
+        <p class="form-field">
+            @Html.LabelFor(model => model.Price, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { max = 100000, min = 1, @class = "input-field" } })
+        </p>
+        <p class="form-field">
+            @Html.LabelFor(model => model.Rating, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { max = 5, min = 0, @class = "input-field" } })
+        </p>
+        <p class="form-field">
+            @Html.LabelFor(model => model.ProductCount, new { @class = "form-label" })
+            @Html.EditorFor(model => model.ProductCount, new { htmlAttributes = new { max = 1000, min = 0, @class = "input-field" } })
+        </p>
+        <p class="form-field">
+            @Html.LabelFor(model => model.Category, new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.Category, new SelectList(ViewBag.Categories), new { @class = "input-field" })
+        </p>
+        <p class="form-field">
+            @Html.LabelFor(model => model.Tags, new { @class = "form-label" })
+            @Html.ListBoxFor(model => model.Tags, new MultiSelectList(ViewBag.Tags), new { @class = "input-field" })
+        </p>
+        <p class="upload-file">
+            @Html.LabelFor(model => model.ProductImages, new { @class = "form-label" })
+            <input type="file" name="ProductImages" accept="image/*" style="width: 245px;" multiple />
+        </p>
+        @if (ViewBag.Change)
+        {
+            <p class="form-field">
+                @Html.LabelFor(model => model.ImageSetting, new { @class = "form-label" })
+            </p>
+            <div class="image-settings-block">
+                @Html.RadioButtonFor(model => model.ImageSetting, "none", new { @class = "image-settings" })
+                <span>Не добавлять изображения</span>
+            </div>
+            <div class="image-settings-block">
+                @Html.RadioButtonFor(model => model.ImageSetting, "replace", new { @class = "image-settings" })
+                <span>Заменить имеющиеся изображения</span>
+            </div>
+            <div class="image-settings-block">
+                @Html.RadioButtonFor(model => model.ImageSetting, "add", new { @class = "image-settings" })
+                <span>Добавить к имеющимся изображениям</span>
+            </div>
+            <p>
+                <input type="button" class="button admin-form-submit" style="width:100%;margin-top: 17px;" value="Сохранить" />
+            </p>
+        }
+        else
+        {
+            <p>
+                <input type="button" class="button admin-form-submit-newprod" style="width:100%;margin-top: 17px;" value="Сохранить" />
+            </p>
+        }
+    </div>
+
+    <div class="error-block">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+}

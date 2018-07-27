@@ -1,0 +1,25 @@
+﻿@model InternetStore.WEB.Models.LoginModel
+
+@using (Html.BeginForm("Login", "Account", new { ischeckout = true }, FormMethod.Post, new { @class = "login" }))
+{
+    @Html.AntiForgeryToken()
+
+    <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</p>
+    <p>
+        @Html.LabelFor(model => model.Login)
+        @Html.EditorFor(model => model.Login)
+        @Html.ValidationMessageFor(model => model.Login, "", new { @class = "color-red" })
+    </p>
+    <p>
+        @Html.LabelFor(model => model.Password)
+        @Html.EditorFor(model => model.Password)
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "color-red" })
+    </p>
+    @Html.ValidationSummary(true, "", new { @class = "color-red" })
+    <p>
+        <input name="login" value="Login" type="submit" class="button" />
+        @Html.EditorFor(model => model.RememberMe)
+        @Html.LabelFor(model => model.RememberMe, new { @class = "inline" })
+    </p>
+    <div class="clear"></div>
+}

@@ -1,0 +1,97 @@
+﻿@model InternetStore.WEB.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="div-box">
+    <div class="banner-subpage">
+        <figure><img src="../../Content/images/background/bg-banner.jpg" alt="bg-banner" /></figure>
+        <div class="banner-subpage-content">
+            <h2>Вход</h2>
+            @*<div class="desc">
+                <p>Home </p>
+                <p>Shop </p>
+                <p>NewThe </p>
+                <p>My Account</p>
+            </div>*@
+        </div>
+    </div>
+</div>
+<div class="div-box mb mt my-account">
+    <div class="container">
+        <div class="customer_login_form_wrap">
+            <h2>Sign In</h2>
+            <p class="mb-20">Sign in with your created account</p>
+
+            @using (Html.BeginForm("Login", "Account", new { ischeckout = false }, FormMethod.Post, new { @class = "login" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <p class="form-row form-row-wide">
+                    @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "mb-20" }) <span class="required">*</span>
+                    @Html.EditorFor(model => model.Login, new { htmlAttributes = new { placeholder = "Логин", @class = "product-begreen-input product-begreen-input-text input-text" } })
+                    @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                </p>
+                <p class="form-row form-row-wide">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "mb-20 mt-20"})<span class="required">*</span>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Пароль", @class = "product-begreen-input product-begreen-input-text input-text" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </p>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p class="form-row mt-20 mb-20">
+                    <input name="login" value="Login" type="submit" class="button" />
+                    @Html.EditorFor(model => model.RememberMe, new { htmlAttributes = new { @class = "product-begreen-input product-begreen-input-checkbox" } })
+                    @Html.LabelFor(model => model.RememberMe, new { htmlAttributes = new { @class = "inline" } })
+                    @*<label for="rememberme" class="inline">
+                            <input id="rememberme" name="rememberme" value="forever" type="checkbox" class="product-begreen-input product-begreen-input-checkbox" /> Remember me
+                    </label>*@
+                </p>
+                @*<p class="product-begreen-lostpassword lost_password"><a href="#">Forgot your password?</a></p>*@
+            }
+
+
+            @*<form method="post" class="login">
+                <p class="form-row form-row-wide">
+                    <label for="username" class="mb-20">Username or email address<span class="required">*</span></label>
+                    <input id="username" name="username" value="" type="text" class="product-begreen-input product-begreen-input-text input-text" />
+                </p>
+                <p class="form-row form-row-wide">
+                    <label for="password" class="mb-20 mt-20">Password <span class="required">*</span></label>
+                    <input id="password" name="password" type="password" class="product-begreen-input product-begreen-input-text input-text" />
+                </p>
+                <p class="form-row mt-20 mb-20">
+                    <input name="login" value="Login" type="submit" class="button" />
+                    <label for="rememberme" class="inline">
+                        <input id="rememberme" name="rememberme" value="forever" type="checkbox" class="product-begreen-input product-begreen-input-checkbox" /> Remember me
+                    </label>
+                </p>
+                <p class="product-begreen-lostpassword lost_password"><a href="#">Forgot your password?</a></p>
+            </form>*@
+        </div>
+    </div>
+</div>
+<div class="div-box">
+    <div class="slider-instagram">
+        <div data-number="8" data-margin="0" data-loop="no" data-navcontrol="yes" class="begreen-owl-carousel">
+            <div><a href="#"><img src="../../Content/images/demo/instagram-1.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-2.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-3.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-4.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-5.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-6.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-7.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-8.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-6.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-7.jpg" alt="instagram" /></a></div>
+            <div><a href="#"><img src="../../Content/images/demo/instagram-8.jpg" alt="instagram" /></a></div>
+        </div>
+        <div class="slider-instagram-absolute-1 container">
+            <div class="slider-instagram-absolute-1-content">
+                <h3>Instagram.</h3>
+            </div>
+        </div>
+        <div class="slider-instagram-absolute-2 container">
+            <div class="slider-instagram-absolute-2-content"><a href="#" class="btn btn-11">@@begreen.yolo</a></div>
+        </div>
+    </div>
+</div>

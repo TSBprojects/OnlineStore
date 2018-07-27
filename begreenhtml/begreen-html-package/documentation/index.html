@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Muse HTML Template - Designed by yolothem.com" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/960.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/prettyPhoto.css" />
+    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="js/jquery.localscroll-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('a[href=#main]').click(function(){
+                $('html, body').animate({scrollTop:0},500);
+                return false;
+            });
+
+
+            $('#sidebar').localScroll();
+            selected_child = false;
+            h5 = false
+
+            $("#sidebar ul li h5").click(function(){
+                if (h5) h5.removeClass("selected");
+                $(this).addClass("selected");
+                h5 = $(this);
+                $(".active").slideUp().removeClass("active");
+                $(this).next().slideDown().addClass("active");
+                activeli = $(this).parent();
+                return false;
+            });
+
+            $("#sidebar ul li ul li").click(function(){
+                if (selected_child) selected_child.removeClass("selected");
+                $(this).addClass("selected");
+                selected_child = $(this);
+                return false;
+            });
+
+
+            var topHeight = $('#sidebar').offset().top;
+            $(window).scroll( function() {
+            if($(document).scrollTop() > topHeight){
+                $('#sidebar').css({position: 'fixed', marginTop: -topHeight});
+            }else{
+                $('#sidebar').css({position: 'absolute', marginTop: 0});
+            }
+            });
+        });
+    </script>
+	<title>Begreen Documentation</title>
+</head>
+
+<body>
+
+<div id="header" class="container_12">
+    <h2>Begreen Template Documentation By YOLO</h2>
+    <div id="header_left" class="grid_4">
+        <div class="inner">
+            <p>Created: November 17, 2016<br />
+            By: <a href="http://demo.yolo.com/html/begreen/" target="_blank">YOLO</a><br />
+            Website: <a href="http://demo.yolo.com/" target="_blank">http://demo.yolo.com/</a>
+        </div>
+    </div>
+    <div id="header_right" class="grid_8">
+        <div class="inner">
+            <p>Thank you for purchasing my template. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://demo.yolo.com/">here</a>. Thanks so much!</p>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+
+<div id="main" class="grid_12">
+    <div id="sidebar" class="grid_3 alpha" data-spy="affix" data-offset-top="200">
+        <ul class="nav tabs">
+            <li><h5 class=""><a href="#overview">Overview and Features</a></h5></li>
+            
+            <li><h5><a href="#online">How to Put It Online</a></h5></li>
+
+            <li><h5><a href="#html">HTML Structure</a></h5></li>
+
+            <li><h5><a href="#library">Library CSS and Javascripts</a></h5></li>             
+
+            <li><h5><a href="#credits">Sources and Credits</a></h5></li>
+
+            <li><h5><a href="#shorcode">CommonElement for shortcode</a></h5></li>
+        </ul>
+    </div>
+    <div id="content" class="grid_9 omega">
+
+        <div id="overview" class="content_element">
+            <h3>Begreen - Responsive Multi-Purpose HTML Template</h3>
+            <p>Begreen is a modern, clean and professional HTML Template, It is fully responsive, it looks stunning on all types of screens and devices.<br />
+</p>
+            <h4 class="option_title">Template Features</h4>
+			
+				<ul>
+                    <li>HTML5 / CSS 3</li>
+					<li>Fully Responsive (Tested on Multiple Devices)</li>
+                    <li>Full Width Layout </li>
+                    <li><strong>Shop Design</strong></li>
+                    <li><strong>Multi-options for Home Page</strong></li>
+                    <li><strong>Inner Pages: Products Grid 4 Columns, Products Grid 3 Columns, Products 3 Columns with Sidebar, Products 2 Columns with Sidebar, Product List, Simple ProductSALE OFF, Variable Product, Out Of Stock ProductOUT, Grouped Product, Affiliate/ External Product, Product Full-width, Recent Products, Best Selling Products, Sale Products, Top Rate Products, Shop, Cart, Checkout, My Account, Wishlist,  Blog list, Blog Grid 2 columns, Blog Grid 3 columns, Detail Blog, Blog masonry, Blog Single post, About, Contact</strong>,...</li>
+                    <li>Mega Top Menu</li>
+                    <li>Mega Vertical Menu</li>
+                    <li>Sticky Menu</li>
+                    <li>Brand slide</li>
+                    <li>Special  Product Groups</li>
+                    <li>Services</li>
+                    <li>Carousel : Best Sellers, On Sales, New Products, Related Products, Testimonials, Categories, Filter Section, Banners, Slideshow,...</li>
+                    <li>jQuery Enhanced</li>
+                    <li> HTML files</li>
+					<li>HTML5 and CSS3 tableless design</li>
+                    <li>List &amp; Grid View (Products)</li>
+                    <li>Compatible Browsers: IE9+, Firefox, Safari, Opera, Chrome</li>
+                    <li>Included documentation.</li>
+				</ul>
+        </div><!-- / content_element -->
+
+        <div id="online" class="content_element">
+            <h4 class="option_title">How to put the template online</h4>
+            <p>After you have downloaded the template to your liking by replacing the text and images with your own, you'll want to put it online but in order to be able to put your new template online there are some requirements you need to meet:</p>
+            <ol>
+                <li>Buy a domain name</li>
+                <li>Buy a web hosting service</li>
+                <li>Have a ftp client installed</li>
+            </ol>
+        </div>
+
+        <div id="html" class="content_element">
+            <h4 class="option_title">HTMl Structure</h4>
+            <p>The basic structure of the pages of the template is presented in the picture below</p>
+            <p><img src="images/html_structure.png" alt="" /></p>
+            <p>Homepage Structure</p>
+            <p><img src="images/home 1.png" alt="Home 1" /></p>
+            <p><img src="images/home 6.png" alt="Home 6" /></p>
+        </div>
+        
+        <div id="library">
+            <div class="content_element">
+                <h4 class="option_title">Library Structure</h4>
+                <p>You need to add enough library before using the template</p>
+                <img src="images/libs.png" alt="CSS Structure" />
+            </div>
+            <div class="content_element">
+                <h6>CSS</h6>
+                <p>We recommend using the FireBug add on in Firefox for a fast identification of the css properties that you might want to change.</p>
+                <img src="images/skins.png" alt="CSS Structure" />
+            </div>
+            <div class="content_element">
+                <h6>Javascripts</h6>
+                <p>This template contains many advanced jQuery functions and libraties.</p>
+                <p>All javascript files (at assets/js/ folder) :</p>
+                <img src="images/js.png" alt="JS Structure" />
+            </div><!-- / content_element --> 
+            
+        </div>            
+
+           
+        
+        
+        <div id="credits" class="content_element">
+            <h4 class="option_title">Sources and Credits</h4>
+            <p>I would like to thank the following providers. This template would not have been possible without the hard work and dedication of all of them.</p>
+            <ul>
+                <li><a href="http://getbootstrap.com/">Bootstrap Css</a></li>
+                <li><a href="http://jquery.com">Jquery</a> JavaScript Library</li>
+                <li>Icon font by <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a></li>
+                <li><a href="http://owlcarousel.owlgraphic.com/">Owl carousel</a></li>
+                <li><a href="http://isotope.metafizzy.co">Isotope PACKAGED v2.2.2</a></li>
+                <li><a href="https://daneden.github.io/animate.css/">Animate</a></li>
+                <li><a href="kenwheeler.github.io/slick/">Slick slider</a></li>
+                <li><a href="http://masonry.desandro.com/">masonry</a></li>
+                
+            </ul>
+            <h5>Please note that none of the images in the demo are available in the template package.</span></h5>
+            <p>In order to get sample images, please register an account at our support forum and go to this form : <a href="http://www.yolo.com/">http://www.yolo.com/</a></p>
+
+            
+        </div><!-- / content_element -->
+
+
+
+
+        <div id="shorcode" class="content_element">
+            <h4 class="option_title">Shortcode shows in commonElement.html</h4>
+            <h6>Button</h6>
+            <img src="images/button.png" alt="Button" />
+            <img src="images/button-2.png" alt="Button" />
+
+            <h6>title-style-1 </h6>
+            <img src="images/title-style-1.png" alt="title-style-1" />
+            <img src="images/title-style-1-2.png" alt="title-style-1" />
+
+            <h6>title-style-2 </h6>
+            <img src="images/title-style-2.png" alt="title-style-1" />
+            <img src="images/title-style-2-2.png" alt="title-style-1" />
+
+            <h6>pagination-style-1</h6>
+            <img src="images/pagination-style-1.png" alt="pagination-style-1" />
+            <img src="images/pagination-style-1-2.png" alt="pagination-style-1" />
+
+            <h6>pagination-style-2</h6>
+            <img src="images/pagination-style-2.png" alt="pagination-style-1" />
+            <img src="images/pagination-style-2-2.png" alt="pagination-style-1" />
+
+            <h6>progress</h6>
+            <img src="images/progress.png" alt="progress" />
+            <img src="images/progress-3.png" alt="progress" />
+            <img src="images/progress-2.png" alt="progress" />
+
+            <h6>coundown </h6>
+            <img src="images/coundown.png" alt="coundown" />
+            <img src="images/coundown-3.png" alt="coundown" />
+            <img src="images/coundown-2.png" alt="coundown" />
+
+            <h6>counter </h6>
+            <img src="images/counter.png" alt="counter" />
+            <img src="images/counter-3.png" alt="counter" />
+            <img src="images/counter-2.png" alt="counter" />
+
+            <h6>banner</h6>
+            <img src="images/banner.png" alt="banner" />
+            <img src="images/banner-2.png" alt="banner" />
+
+            <h6>recentnew </h6>
+            <img src="images/recent.png" alt="recent" />
+            <img src="images/recent-2.png" alt="recent" />
+
+            <h6>icon box</h6>
+            <img src="images/icon.png" alt="icon" />
+            <img src="images/icon-2.png" alt="icon" />
+
+
+            <div class="divider_top"><a style="float: right;" href="#main">Back to top</a></div>
+        </div>
+        
+        
+        
+    </div>
+    <div class="clear"></div>
+</div> <!-- /container_12 -->
+
+</div>
+</body>
+</html>

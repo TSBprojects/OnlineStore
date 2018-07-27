@@ -1,0 +1,212 @@
+﻿@model InternetStore.WEB.Models.CheckOutUserModel
+@{
+    ViewBag.Title = "CheckOut";
+}
+<div class="check-out">
+    <div class="div-box">
+        <div class="banner-subpage">
+            <figure><img src="../../Content/images/background/bg-banner.jpg" alt="bg-banner" /></figure>
+            <div class="banner-subpage-content">
+                <h2>Оформление заказа</h2>
+                @*<div class="desc">
+                    <p>Shop  </p>
+                    <p>Check Out</p>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <div class="div-box mb mt">
+        <div class="container">
+            @if (User.Identity.IsAuthenticated && Roles.IsUserInRole(User.Identity.Name, "Guest"))
+            {
+                <div class="form-customers">
+                    <h3 class="check-out-title">Returning customers?</h3>
+                    <div class="product-begreen-checkout-info">
+                        Returning customer?
+                        <div class="showlogin">Click here to login</div>
+                    </div>
+                    @Html.Action("CheckOutLogin", "Account")
+                </div>
+            }
+            @using (Html.BeginForm("CheckOut", "Cart", FormMethod.Post, new { @class = "checkout" }))
+            {
+                @Html.AntiForgeryToken()
+                <div id="customer_details" class="col2-set row">
+                    @if (User.Identity.IsAuthenticated && Roles.IsUserInRole(User.Identity.Name, "Guest"))
+                    {
+                        <div class="col-1 col-md-6">
+                            <div class="product-begreen-billing-fields">
+                                <h3>Billing Details</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            @Html.LabelFor(model => model.GuestModel.FirstName)<abbr title="required" class="required">*</abbr>
+                                            @Html.EditorFor(model => model.GuestModel.FirstName, new { htmlAttributes = new { placeholder = "Имя" } })
+                                            @Html.ValidationMessageFor(model => model.GuestModel.FirstName, "", new { @class = "text-danger" })
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            @Html.LabelFor(model => model.GuestModel.LastName)<abbr title="required" class="required">*</abbr>
+                                            @Html.EditorFor(model => model.GuestModel.LastName, new { placeholder = "Фамилия" } )
+                                            @Html.ValidationMessageFor(model => model.GuestModel.LastName, "", new { @class = "text-danger" })
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            @Html.LabelFor(model => model.GuestModel.Email)<abbr title="required" class="required">*</abbr>
+                                            @Html.EditorFor(model => model.GuestModel.Email, new { htmlAttributes = new { placeholder = "Электронная почта" } })
+                                            @Html.ValidationMessageFor(model => model.GuestModel.Email, "", new { @class = "text-danger" })
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            @Html.LabelFor(model => model.GuestModel.PhoneNumber)<abbr title="required" class="required">*</abbr>
+                                            @Html.EditorFor(model => model.GuestModel.PhoneNumber, new { htmlAttributes = new { placeholder = "Мобильный телефон" } })
+                                            @Html.ValidationMessageFor(model => model.GuestModel.PhoneNumber, "", new { @class = "text-danger" })
+                                        </p>
+                                    </div>
+                                </div>
+                                <p>
+                                    @Html.LabelFor(model => model.GuestModel.Address)<abbr title="required" class="required">*</abbr>
+                                    @Html.EditorFor(model => model.GuestModel.Address, new { htmlAttributes = new { placeholder = "Адрес" } })
+                                    @Html.ValidationMessageFor(model => model.GuestModel.Address, "", new { @class = "text-danger" })
+                                </p>
+                                <p>
+                                    @Html.LabelFor(model => model.GuestModel.ZipCode)<abbr title="required" class="required">*</abbr>
+                                    @Html.EditorFor(model => model.GuestModel.ZipCode, new { htmlAttributes = new { placeholder = "Почтовый индекс" } })
+                                    @Html.ValidationMessageFor(model => model.GuestModel.ZipCode, "", new { @class = "text-danger" })
+                                </p>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <p class="create-account product-begreen-validated">
+                                    @Html.LabelFor(model => model.GuestModel.CreateAccount, htmlAttributes: new { @class = "checkbox" } )
+                                    @Html.EditorFor(model => model.GuestModel.CreateAccount, new { htmlAttributes = new { @class = "create-acc-checkbox" } } )
+                                </p>
+                                <div class="create-account create-account-block">
+                                    <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
+                                    <p>
+                                        @Html.LabelFor(model => model.GuestModel.RegModel.Password)<abbr title="required" class="required">*</abbr>
+                                        @Html.EditorFor(model => model.GuestModel.RegModel.Password, new { htmlAttributes = new { placeholder = "Пароль" } })
+                                        @Html.ValidationMessageFor(model => model.GuestModel.RegModel.Password, "", new { @class = "text-danger" })
+                                    </p>
+                                    <p>
+                                        @Html.LabelFor(model => model.GuestModel.RegModel.ConfirmPassword)<abbr title="required" class="required">*</abbr>
+                                        @Html.EditorFor(model => model.GuestModel.RegModel.ConfirmPassword, new { htmlAttributes = new { placeholder = "Подтвердите пароль" } })
+                                        @Html.ValidationMessageFor(model => model.GuestModel.RegModel.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </p>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-2 col-md-6">
+                        <div class="product-begreen-shipping-fields">
+                            <h3>Additional Information</h3>
+                            <p id="order_comments_field" class="notes product-begreen-validated">
+                                @Html.LabelFor(model => model.Comment)
+                                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { placeholder = "Notes about your order, e.g. special notes for delivery.", rows = "6", cols = "5" } } )
+                                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="order_review_heading" style="text-align:center;">Your order</h3>
+                <div id="order_review" class="product-begreen-checkout-review-order">
+                    @Html.Action("CheckOutOrder", "Cart")
+                    <div id="payment" class="product-begreen-checkout-payment">
+                        <ul class="wc_payment_methods payment_methods methods">
+                            <li class="payment_method_cheque">
+                                <h3 id="order_review_heading">Способ доставки</h3>
+                                <div class="payment_box_title active">
+                                    <input name="DeliveryMethod" value="Почтой" checked="checked" data-order_button_text="" type="radio" class="input-radio" />
+                                    <label>Почтой</label>
+                                </div>
+                                <div class="payment_box_title active">
+                                    <input name="DeliveryMethod" value="Курьером" data-order_button_text="" type="radio" class="input-radio" />
+                                    <label>Курьером</label>
+                                </div>
+                                <div class="payment_box_title active">
+                                    <input name="DeliveryMethod" value="Самовывоз" data-order_button_text="" type="radio" class="input-radio" />
+                                    <label>Самовывоз</label>
+                                </div>
+                            </li>
+                            <li class="payment_method_paypal">
+                                <h3 id="order_review_heading">Способ оплаты</h3>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="Visa" checked="checked" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/visa.svg" />Visa, MasterCard / EuroCard, МИР</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="WebMoney" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/WebMoney.svg" />WebMoney</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="Яндекс.Деньги" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/Яндекс.Деньги.svg" />Яндекс.Деньги</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="RBK Money" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/RBK Money.svg" />RBK Money</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="ROBOKASSA" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/ROBOKASSA.svg" />ROBOKASSA</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="Альфа-Банк" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/Альфа-Клик.svg" />Альфа-Банк</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="Сбербанк Онлайн" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/Сбербанк Онлайн.svg" />Сбербанк Онлайн</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="QIWI-кошелёк" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/QIWI-кошелёк.svg" />QIWI-кошелёк</label>
+                                </div>
+                                <div class="payment_box_title">
+                                    <input name="PaymentMethod" value="PayPal" data-order_button_text="Proceed to PayPal" type="radio" class="input-radio" />
+                                    <label><img src="../../Content/images/myPic/PayPal.svg" />PayPal</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="place-order mt-20">
+                            <input id="place_order" type="submit" class="button alt" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="div-box">
+        <div class="slider-instagram">
+            <div data-number="8" data-margin="0" data-loop="no" data-navcontrol="yes" class="begreen-owl-carousel">
+                <div><a href="#"><img src="../../Content/images/demo/instagram-1.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-2.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-3.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-4.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-5.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-6.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-7.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-8.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-6.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-7.jpg" alt="instagram" /></a></div>
+                <div><a href="#"><img src="../../Content/images/demo/instagram-8.jpg" alt="instagram" /></a></div>
+            </div>
+            <div class="slider-instagram-absolute-1 container">
+                <div class="slider-instagram-absolute-1-content">
+                    <h3>Instagram.</h3>
+                </div>
+            </div>
+            <div class="slider-instagram-absolute-2 container">
+                <div class="slider-instagram-absolute-2-content"><a href="#" class="btn btn-11">@@begreen.yolo</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/ChekoutJS")
+}

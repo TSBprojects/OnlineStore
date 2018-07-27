@@ -1,0 +1,178 @@
+﻿@using InternetStore.BLL.DataTransferObjects
+@model IEnumerable<ProductDTO>
+
+@if (Model.Count() != 0)
+{
+    <div class="product-wrap-list">
+        @foreach (ProductDTO pr in Model)
+        {
+            <div class="product-style_5 mb">
+                <div class="product-item-inner row mg-0">
+                    <div class="col-sm-4 col-xs-12 pd-0">
+                        <div class="product-thumb">
+                            <div class="product-flash-wrap"></div>
+                            <div class="product-thumb-primary"><img src="@pr.ProductImages[0].Path" alt="product1" width="375" height="450" class="attachment-shop_catalog size-shop_catalog wp-post-image" /></div><a href="#" class="product-link">
+                                <div class="product-hover-sign">
+                                    <hr />
+                                    <hr />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-xs-12 pd-0">
+                        <div class="product-info">
+                            <a href="@Url.Action("CurrentPlant", "Product", new { id = pr.Id })">
+                                <h3>@pr.Name</h3>
+                            </a>
+                            <div class="div-rate mb-20">
+                                <div class="star-rating">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (i + 1 <= pr.Rating)
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-star-o"></i>
+                                        }
+                                    }
+                                </div><span class="price">
+                                    <del><span class="product-begreen-price-amount amount"><span class="product-begreen-price-currencysymbol">$</span>49.00</span></del><ins><span class="product-begreen-price-amount amount"><span class="product-begreen-price-currencysymbol">$</span>@pr.Price.ToString(".00").Replace(",", ".")</span></ins>
+                                </span>
+                            </div>
+                            <div class="product-single-short-description mb-20">
+                                <p>@pr.PartialDescription</p>
+                            </div>
+                            <div class="product-actions">
+                                <div class="add-to-cart-wrap" productId="@pr.Id"><a class="add_to_cart_button"><i class="fa fa-cart-plus"></i> Add to cart</a></div>
+                                <div class="yith-wcwl-add-to-wishlist add-to-wishlist-559">
+                                    @*<div class="yith-wcwl-add-button show"><a href="#" class="add_to_wishlist"><i class="fa fa-heart-o"></i> Add to Wishlist</a></div>*@
+                                </div>@*<a href="#" class="compare add_to_compare"><i class="fa fa-signal"></i>Compare</a><a href="#" class="product-quick-view"><i class="fa fa-search"></i>Quick view</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    if (ViewBag.full)
+    {
+        <div class="pagination-style-2">
+            <div class="pagination-list">
+
+                @if (ViewBag.pageCount == 1)
+                {
+                    <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage })">
+                        <div class="page active">@ViewBag.currentPage</div>
+                    </a>
+                }
+                else if (ViewBag.currentPage == ViewBag.pageCount)
+                {
+                    if (ViewBag.pageCount >= 4)
+                    {
+                        <a href="@Url.Action("Plants", "Product", new { id = 1 })">
+                            <div class="page"><i class="fa fa-angle-double-left"> </i></div>
+                        </a>
+                    }
+                    if (ViewBag.pageCount == 2)
+                    {
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage - 1 })">
+                            <div class="page">@(ViewBag.currentPage - 1)</div>
+                        </a>
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage })">
+                            <div class="page active">@ViewBag.currentPage</div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage-2 })">
+                            <div class="page">@(ViewBag.currentPage - 2)</div>
+                        </a>
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage-1 })">
+                            <div class="page">@(ViewBag.currentPage - 1)</div>
+                        </a>
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage })">
+                            <div class="page active">@ViewBag.currentPage</div>
+                        </a>
+                    }
+                }
+                else if (ViewBag.currentPage >= 3)
+                {
+                    <a href="@Url.Action("Plants", "Product", new { id = 1 })">
+                        <div class="page"><i class="fa fa-angle-double-left"> </i></div>
+                    </a>
+                    <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage-1 })">
+                        <div class="page">@(ViewBag.currentPage - 1)</div>
+                    </a>
+                    <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage })">
+                        <div class="page active">@ViewBag.currentPage</div>
+                    </a>
+                    <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage+1 })">
+                        <div class="page">@(ViewBag.currentPage + 1)</div>
+                    </a>
+                    if (ViewBag.pageCount > ViewBag.currentPage + 1)
+                    {
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.pageCount })">
+                            <div class="page"><i class="fa fa-angle-double-right"> </i></div>
+                        </a>
+                    }
+                }
+                else if (ViewBag.currentPage > 1)
+                {
+                    <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage-1 })">
+                        <div class="page">@(ViewBag.currentPage - 1)</div>
+                    </a>
+                    <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage })">
+                        <div class="page active">@ViewBag.currentPage</div>
+                    </a>
+                    <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage+1 })">
+                        <div class="page">@(ViewBag.currentPage + 1)</div>
+                    </a>
+                    if (ViewBag.pageCount > ViewBag.currentPage + 1)
+                    {
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.pageCount })">
+                            <div class="page"><i class="fa fa-angle-double-right"> </i></div>
+                        </a>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.pageCount == 2)
+                    {
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage })">
+                            <div class="page active">@(ViewBag.currentPage)</div>
+                        </a>
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage+1 })">
+                            <div class="page">@(ViewBag.currentPage + 1)</div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage })">
+                            <div class="page active">@(ViewBag.currentPage)</div>
+                        </a>
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage+1 })">
+                            <div class="page">@(ViewBag.currentPage + 1)</div>
+                        </a>
+                        <a href="@Url.Action("Plants", "Product", new { id = ViewBag.currentPage+2 })">
+                            <div class="page">@(ViewBag.currentPage + 2)</div>
+                        </a>
+                        if (ViewBag.pageCount > ViewBag.currentPage + 2)
+                        {
+                            <a href="@Url.Action("Plants", "Product", new { id = ViewBag.pageCount })">
+                                <div class="page"><i class="fa fa-angle-double-right"> </i></div>
+                            </a>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    }
+}
+else if(!ViewBag.isAjax)
+{
+    <div class="emty-product-data">
+        Товаров не найдено.
+    </div>
+}

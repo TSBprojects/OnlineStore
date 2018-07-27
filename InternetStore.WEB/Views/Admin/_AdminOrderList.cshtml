@@ -1,0 +1,44 @@
+﻿@using InternetStore.BLL.DataTransferObjects
+@model IEnumerable<OrderDTO>
+
+@if (Model.Count() > 0)
+{
+    int k = 1;
+    foreach (OrderDTO o in Model)
+    {
+        <div class="user-orders">
+            <ul class="user-orders-cur-info">
+                <li><label>Заказ</label> №@(k++)</li>
+                <li><label>Сумма заказа:</label> $@o.OrderPrice.ToString(".00").Replace(",", ".")</li>
+                <li><label>Количество товара в заказе:</label> @o.ProductsCount</li>
+                <li><label>Способ доставки:</label> @o.DeliveryMethod</li>
+                <li><label>Способ оплаты:</label> @o.PaymentMethod</li>
+                <li class="order-status"><label>Статус заказа:</label> <span>@o.Status</span></li>
+                <li><label>Комментарий пользователя:</label> @o.Comment</li>
+            </ul>
+            @if (Roles.IsUserInRole(User.Identity.Name, "Admin"))
+            {
+                <ul class="user-orders-cur-user">
+                    <li><label>Имя заказчика:</label> @o.User.FirstName</li>
+                    <li><label>Email заказчика:</label> @o.User.Email</li>
+                    <li><label>Адрес заказчика:</label> @o.User.Address</li>
+                    <li><label>Телефон заказчика:</label> @o.User.PhoneNumber</li>
+                    <li><label>Почтовый индекс заказчика:</label> @o.User.ZipCode</li>
+                    <li><label>IP заказчика:</label> @o.User.IP</li>
+                </ul>
+            }
+            @if (!o.Status.Equals("Completed") && Roles.IsUserInRole(User.Identity.Name, "Admin"))
+            {
+                <p>
+                    <input type="button" class="button user-orders-submit" style="width:100%;margin-top:17px;" orderid="@o.Id" value="Сохранить" />
+                </p>
+            }
+        </div>
+    }
+}
+else
+{
+    <div class="emty-product-data">
+        Заказы отсутствуют.
+    </div>
+}

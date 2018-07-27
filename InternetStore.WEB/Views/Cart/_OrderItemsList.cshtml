@@ -1,0 +1,73 @@
+﻿@using InternetStore.BLL.DataTransferObjects
+@model List<OrderItemDTO>
+
+@using (Ajax.BeginForm(
+    "UpdateCart", "Cart", null,
+    new AjaxOptions() { OnSuccess = "CartWasUpdate" },
+    new { @class = "cart-form" }))
+{
+    <table>
+        <tr>
+            <th>Product</th>
+            <th> </th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th> </th>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr orderItemId="@Model[i].Id">
+                <td data-title="Product">
+                    <a class="image-product">
+                        <img src="@Model[i].Product.ProductImages[0].Path" width="180" height="220" />
+                    </a>
+                </td>
+                <td data-title="Name"><a href="#" class="name-product">@Model[i].Product.Name</a></td>
+                <td data-title="Price" class="td-price"><span class="price">$@Model[i].Product.Price.ToString(".00").Replace(",", ".")</span></td>
+                <td data-title="Quantity" class="td-quanlity">
+                    <span class="quanlity">Quantity:</span>
+                    <input class="quanlity-value" type="number" name="[@i].ItemCount" value="@Model[i].ItemCount" min="1" />
+                    <input class="order-Item-Id" type="hidden" name="[@i].Id" value="@Model[i].Id" />
+                </td>
+                <td data-title="Total" class="td-total-price"><span class="total-product-price">$@((Model[i].Product.Price * Model[i].ItemCount).ToString(".00").Replace(",", "."))</span></td>
+                <td data-title="Remove"><i class="fa fa-times"></i></td>
+            </tr>
+        }
+    </table>
+    if (Model.Count != 0)
+    {
+        <div class="button-cart">
+            <div class="button-cart-right">
+                <button class="update-cart" type="submit">Update Cart</button>
+                @Html.ActionLink("Proceed to Checkout", "CheckOut", "Cart", null, new { @class = "process" })
+            </div>
+        </div>
+    }
+}
+@if (Model.Count != 0)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <form class="cart-total">
+                <h4>Cart Totals</h4>
+                <table>
+                    @*<tr>
+                            <td>Subtotal</td>
+                            <td><span class="subtotal">$890.00</span></td>
+                        </tr>*@
+                    <tr>
+                        <td>Total</td>
+                        <td><span class="total-cart-price">$@Model[0].Order.OrderPrice.ToString(".00").Replace(",", ".")</span></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="emty-data">
+        У вас ещё нет товаров в корзине.
+    </div>
+}

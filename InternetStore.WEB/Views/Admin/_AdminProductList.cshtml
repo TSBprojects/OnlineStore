@@ -1,0 +1,31 @@
+﻿@using InternetStore.BLL.DataTransferObjects
+@model IEnumerable<ProductDTO>
+
+<div class="prod-add-block-admin">
+    <div class="desc-prod-add-row-admin">
+        <span class="prod-name-add-admin"><i class="fa fa-plus" aria-hidden="true"></i>     Добавить товар</span>
+    </div>
+    <div id="form-block-add" class="form-prod-block" style="opacity:0"></div>
+</div>
+
+@if (Model.Count() > 0)
+{
+    foreach (ProductDTO pr in Model)
+    {
+        <div class="prod-block-admin" productid="@pr.Id">
+            <img class="prod-img-admin" src="@pr.ProductImages[0].Path" />
+            <div class="desc-prod-row-admin">
+                <span class="prod-name-admin">@pr.Name</span>
+                <i class="fa fa-minus-square" aria-hidden="true"></i>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </div>
+            <div id="form-block-@pr.Id" class="form-prod-block" style="opacity:0"></div>
+        </div>
+    }
+}
+else
+{
+    <div class="emty-product-data">
+        Товары отсутствуют.
+    </div>
+}

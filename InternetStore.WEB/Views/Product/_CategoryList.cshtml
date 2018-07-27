@@ -1,0 +1,14 @@
+﻿@using InternetStore.BLL.DataTransferObjects
+@model IEnumerable<CategoryDTO>
+
+@foreach (CategoryDTO cat in Model)
+{
+    if (ViewBag.active && cat.Id == ViewBag.activeCategory)
+    {
+        <li categoryId="@cat.Id" class="active-category"><a>@cat.Name</a></li>
+    }
+    else
+    {
+        <li categoryId="@cat.Id"><a>@cat.Name</a></li>
+    }
+}
