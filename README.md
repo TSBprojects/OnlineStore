@@ -2,7 +2,7 @@
 
 Simple online store.
 
-**I'am worked only with backend*<br/>
+**I worked only with backend*<br/>
 **C# and JavaScript were used in development*
 
 ## Functional
